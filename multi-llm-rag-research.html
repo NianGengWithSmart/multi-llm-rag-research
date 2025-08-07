@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-LLM Knowledge Distillation and RAG System Optimization</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .lang-switch {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lang-switch:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .section:nth-child(odd) {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #667eea;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .content-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .content-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .content-card ul {
+            padding-left: 1.5rem;
+        }
+
+        .content-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Language Toggle */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">
+                <i class="fas fa-brain"></i> Multi-LLM RAG Research
+            </div>
+            <ul class="nav-links">
+                <li><a href="#background">Background</a></li>
+                <li><a href="#methodology">Methodology</a></li>
+                <li><a href="#experiment">Experiment</a></li>
+                <li><a href="#contribution">Contribution</a></li>
+            </ul>
+            <button class="lang-switch" onclick="toggleLanguage()">
+                <i class="fas fa-language"></i> <span id="langText">中文</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="lang-content active" id="en-hero">
+                <h1>Multi-LLM Knowledge Distillation and RAG System Optimization</h1>
+                <p>For Educational Applications</p>
+            </div>
+            <div class="lang-content" id="zh-hero">
+                <h1>面向教育场景的多模型知识蒸馏与RAG系统优化研究</h1>
+                <p>提升检索增强生成系统在高等教育中的应用效果</p>
+            </div>
+            <a href="#background" class="cta-button">
+                <i class="fas fa-arrow-down"></i> Explore Research
+            </a>
+        </div>
+    </section>
+
+    <!-- Background Section -->
+    <section id="background" class="section">
+        <div class="container">
+            <div class="lang-content active" id="en-background">
+                <h2 class="section-title">Background & Objective</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Current Challenges</h3>
+                        <ul>
+                            <li>Traditional RAG systems suffer from heterogeneous document formats and noise interference</li>
+                            <li>Improper segmentation strategies lead to low retrieval accuracy</li>
+                            <li>Severe hallucination problems in course-specific knowledge scenarios</li>
+                            <li>Limited effectiveness when handling proprietary educational content</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-target"></i> Research Objectives</h3>
+                        <ul>
+                            <li>Construct high-quality course-specific knowledge bases</li>
+                            <li>Generate structured Q&A knowledge bases through multi-model collaborative knowledge distillation</li>
+                            <li>Enhance RAG system retrieval accuracy for educational applications</li>
+                            <li>Validate methodology effectiveness in real educational scenarios</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="lang-content" id="zh-background">
+                <h2 class="section-title">研究背景与目标</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> 现有挑战</h3>
+                        <ul>
+                            <li>传统RAG系统存在文档格式异构、噪声干扰等问题</li>
+                            <li>分割策略不当导致检索精度低下</li>
+                            <li>在课程专有知识场景中幻觉问题严重</li>
+                            <li>处理教育专有内容时效果有限</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-target"></i> 研究目标</h3>
+                        <ul>
+                            <li>构建高质量的课程专用知识库</li>
+                            <li>通过多模型协同知识蒸馏生成结构化问答知识库</li>
+                            <li>提升RAG系统在教育应用中的检索准确性</li>
+                            <li>验证方法在实际教育场景中的有效性</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="section">
+        <div class="container">
+            <div class="lang-content active" id="en-methodology">
+                <h2 class="section-title">Methodology</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-cogs"></i> Multi-Model Collaborative Generation</h3>
+                        <p>Utilizes five frontier LLMs (Claude Sonnet 4, Gemini 2.5 Pro, DeepSeek R1, ChatGPT o3, Grok 4) with Chain-of-Thought prompts to extract meta-knowledge and generate self-contained Q&A pairs.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-chart-line"></i> Quantitative Evaluation Framework</h3>
+                        <p>Designs comprehensive assessment system encompassing text quality metrics (readability, coherence, technical term density) and retrieval accuracy metrics (recall, precision).</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-vote-yea"></i> Cross-Model Voting Mechanism</h3>
+                        <p>Employs semantic similarity comparison and voting mechanisms to filter and integrate complementary Q&A pairs from different models.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-database"></i> Knowledge Base Optimization</h3>
+                        <p>Applies rule-based segmentation strategies for generated structured Q&A pairs, replacing traditional automatic segmentation methods.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lang-content" id="zh-methodology">
+                <h2 class="section-title">研究方法</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-cogs"></i> 多模型协同生成</h3>
+                        <p>采用五个前沿LLM（Claude Sonnet 4、Gemini 2.5 Pro、DeepSeek R1、ChatGPT o3、Grok 4），使用链式思维提示词提取元知识并生成自包含问答对。</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-chart-line"></i> 量化评估框架</h3>
+                        <p>设计综合评估系统，涵盖文本质量指标（可读性、连贯性、技术术语密度）和检索精度指标（召回率、精确率）。</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-vote-yea"></i> 跨模型投票机制</h3>
+                        <p>采用语义相似度比较和投票机制，筛选并整合来自不同模型的互补性问答对。</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-database"></i> 知识库优化</h3>
+                        <p>对生成的结构化问答对采用基于规则的分割策略，替代传统自动分割方法。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiment Section -->
+    <section id="experiment" class="section">
+        <div class="container">
+            <div class="lang-content active" id="en-experiment">
+                <h2 class="section-title">Experiment & Analysis</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-file-alt"></i> Dataset</h3>
+                        <ul>
+                            <li>11 documents from ELEC3442 Embedded System course</li>
+                            <li>286 benchmark queries for evaluation</li>
+                            <li>Comprehensive testing across diverse question types</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-trophy"></i> Text Quality Enhancement</h3>
+                        <ul>
+                            <li>Gemini 2.5 Pro achieved optimal readability performance</li>
+                            <li>Claude Sonnet 4 and DeepSeek R1 led in content richness</li>
+                            <li>Significant improvements in text coherence and technical depth</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-search"></i> Retrieval Accuracy Results</h3>
+                        <ul>
+                            <li>~20 percentage points improvement in recall and precision</li>
+                            <li>Claude Sonnet 4: 58.04% recall and 59.97% precision GSB win rates</li>
+                            <li>Qualitative cases: Traditional KB (0% relevance) vs Q&A KB (80% recall, 90% precision)</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-chart-bar"></i> Performance Metrics</h3>
+                        <ul>
+                            <li>Comprehensive evaluation across text quality and retrieval metrics</li>
+                            <li>LLM-as-Judge evaluation framework</li>
+                            <li>Consistent improvements across diverse educational scenarios</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="lang-content" id="zh-experiment">
+                <h2 class="section-title">实验与分析</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-file-alt"></i> 数据集</h3>
+                        <ul>
+                            <li>ELEC3442嵌入式系统课程的11个文档</li>
+                            <li>286个基准查询用于评估</li>
+                            <li>跨多种问题类型的综合测试</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-trophy"></i> 文本质量提升</h3>
+                        <ul>
+                            <li>Gemini 2.5 Pro在可读性方面表现最佳</li>
+                            <li>Claude Sonnet 4和DeepSeek R1在内容丰富度方面领先</li>
+                            <li>文本连贯性和技术深度显著改善</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-search"></i> 检索精度结果</h3>
+                        <ul>
+                            <li>召回率和精确率提升约20个百分点</li>
+                            <li>Claude Sonnet 4：GSB胜率达58.04%(召回率)和59.97%(精确率)</li>
+                            <li>定性案例：传统知识库(0%相关度) vs 问答知识库(80%召回率，90%精确率)</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-chart-bar"></i> 性能指标</h3>
+                        <ul>
+                            <li>跨文本质量和检索指标的综合评估</li>
+                            <li>基于LLM的评判框架</li>
+                            <li>在多种教育场景下的一致性改进</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contribution Section -->
+    <section id="contribution" class="section">
+        <div class="container">
+            <div class="lang-content active" id="en-contribution">
+                <h2 class="section-title">Contribution</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-lightbulb"></i> Methodological Innovation</h3>
+                        <p>Proposed a data-centric, model-agnostic knowledge base construction workflow that enhances knowledge quality through preprocessing stages, reducing dependence on expensive fine-tuning or ultra-long context inference.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-microscope"></i> Empirical Validation</h3>
+                        <p>Provided empirical evidence through large-scale metrics and concrete case studies that synthetic multi-LLM Q&A corpora significantly improve RAG accuracy and answer utility in higher education settings.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-tools"></i> Evaluation Framework</h3>
+                        <p>Established an integrated assessment framework with LLM-as-judge metrics, portable to other courses and domains, enabling continuous improvement of educational chatbots.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-rocket"></i> Practical Value</h3>
+                        <p>Demonstrated that rigorous knowledge engineering approaches offer a pragmatic and scalable path to trustworthy GenAI assistance in knowledge-intensive academic environments.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lang-content" id="zh-contribution">
+                <h2 class="section-title">主要贡献</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-lightbulb"></i> 方法论创新</h3>
+                        <p>提出了数据中心化、模型无关的知识库构建工作流程，通过预处理阶段提升知识质量，减少对昂贵微调或超长上下文推理的依赖。</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-microscope"></i> 实证验证</h3>
+                        <p>通过大规模指标和具体案例研究，实证证明了合成多模型问答语料库在高等教育场景下显著提升RAG精度和答案实用性。</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-tools"></i> 评估框架</h3>
+                        <p>建立了包含LLM评判指标的集成评估框架，可移植到其他课程和领域，支持教育聊天机器人的持续改进。</p>
+                    </div>
+                    <div class="content-card">
+                        <h3><i class="fas fa-rocket"></i> 实用价值</h3>
+                        <p>验证了严格的知识工程方法为知识密集型学术环境中的可信GenAI辅助提供了实用且可扩展的路径。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Multi-LLM Knowledge Distillation Research. All rights reserved.</p>
+            <p>Contact: nianheng.zhang@connect.hku.hk | Department of EEE, University of Hong Kong</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            const langText = document.getElementById('langText');
+            const enElements = document.querySelectorAll('[id^="en-"]');
+            const zhElements = document.querySelectorAll('[id^="zh-"]');
+            
+            if (currentLang === 'en') {
+                currentLang = 'zh';
+                langText.textContent = 'English';
+                enElements.forEach(el => el.classList.remove('active'));
+                zhElements.forEach(el => el.classList.add('active'));
+            } else {
+                currentLang = 'en';
+                langText.textContent = '中文';
+                zhElements.forEach(el => el.classList.remove('active'));
+                enElements.forEach(el => el.classList.add('active'));
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = target.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
