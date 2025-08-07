@@ -158,6 +158,11 @@
             color: #5a6fd8;
         }
 
+        .bold_white {
+            font-weight: bold;
+            color: white;
+        }
+
         .content-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -228,6 +233,14 @@
             height: auto;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            aspect-ratio: auto;
+            object-fit: contain;
+        }
+
+        .image-item-no-circle img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0px;
             aspect-ratio: auto;
             object-fit: contain;
         }
@@ -482,6 +495,7 @@
         </nav>
     </header>
 
+    
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -550,13 +564,13 @@
                 建议的图片命名规范：
                 - fig1_traditional_rag_problems.jpg/png
                 - fig2_llm_hallucination_examples.jpg/png
-                - fig3_methodology_generation.jpg/png
+                - fig3_methodology.jpg/png
                 - fig4_evaluation_framework.jpg/png
                 - fig5_voting_mechanism.jpg/png
                 - fig6_kb_optimization.jpg/png
-                - fig7_performance_comparison.jpg/png
-                - fig8_retrieval_accuracy.jpg/png
-                - fig9_text_quality_results.jpg/png
+                - fig7_text readability_and_content_richness metrics.jpg/png
+                - fig8_structural_quality_metrics.jpg/png
+                - fig9_retrieval_accuracy.jpg/png
                 - demo_video.mp4
                 =================== 图片路径替换说明结束 ===================
                 -->
@@ -564,13 +578,13 @@
                 <div class="image-row">
                     <div class="image-item">
                         <!-- 替换为实际图片路径 -->
-                        <img src="./images/fig1_traditional_rag_problems.jpg" alt="Traditional RAG Problems">
-                        <div class="image-caption">Figure 1: Challenges in Traditional RAG Systems for Educational Content</div>
+                        <img src="./images/fig1_llm_hallucination_examples.png" alt="LLM Hallucination Examples">
+                        <div class="image-caption">Examples of LLM lacking critical knowledge in Course-specific Queries. When a student asked about ELEC3442 project requirements, LLM gaves generic hardware design steps, not the course-specific details. </div>
                     </div>
                     <div class="image-item">
                         <!-- 替换为实际图片路径 -->
-                        <img src="./images/fig2_llm_hallucination_examples.jpg" alt="LLM Hallucination Examples">
-                        <div class="image-caption">Figure 2: Examples of LLM Hallucination in Course-specific Queries</div>
+                        <img src="./images/fig2_traditional_rag_problems.png" alt="Traditional RAG Problems">
+                        <div class="image-caption">Challenges of traditional RAG systems in the knowledge base building process</div>
                     </div>
                 </div>
             </div>
@@ -599,13 +613,13 @@
                 <div class="image-row">
                     <div class="image-item">
                         <!-- 替换为实际图片路径 -->
-                        <img src="./images/fig1_traditional_rag_problems.jpg" alt="Traditional RAG Problems">
-                        <div class="image-caption">图1: 传统RAG系统在教育内容处理中的挑战</div>
+                        <img src="./images/fig1_llm_hallucination_examples.png" alt="LLM Hallucination Examples">
+                        <div class="image-caption">LLM 在特定课程问题中缺乏关键知识的示例。当一名学生询问 ELEC3442 项目要求时，LLM 只提供了一般的硬件设计步骤，而没有提供特定课程的详细信息。</div>
                     </div>
                     <div class="image-item">
                         <!-- 替换为实际图片路径 -->
-                        <img src="./images/fig2_llm_hallucination_examples.jpg" alt="LLM Hallucination Examples">
-                        <div class="image-caption">图2: LLM在课程特定查询中的幻觉问题示例</div>
+                        <img src="./images/fig2_traditional_rag_problems.png" alt="Traditional RAG Problems">
+                        <div class="image-caption">传统RAG系统在知识库构建过程中的挑战</div>
                     </div>
                 </div>
             </div>
@@ -618,7 +632,7 @@
             <div class="lang-content active" id="en-methodology">
                 <h2 class="section-title">Methodology</h2>
                 <div class="methodology-intro">
-                    This research proposes an innovative <span class="bold">"Multi-LLM Synthetic Q&A Generation, Comparison, and Integration"</span> pipeline with a core workflow of <span class="bold">"generate → evaluate → compare → integrate"</span>.
+                    This research proposes an innovative <span class="bold_white">"Multi-LLM Synthetic Q&A Generation, Comparison, and Integration"</span> pipeline with a core workflow of <span class="bold_white">"generate → evaluate → compare → integrate"</span>.
                 </div>
                 <div class="methodology-content">
                     <div class="methodology-tabs">
@@ -628,7 +642,7 @@
                         </div>
                         <div class="methodology-tab" data-tab="2">
                             <h3><i class="fas fa-chart-line"></i> Quantitative Evaluation Framework</h3>
-                            <p>Designs comprehensive assessment system encompassing <span class="bold">text quality metrics</span> (<span class="bold">readability</span>, <span class="bold">coherence</span>, <span class="bold">technical term density</span>) and <span class="bold">retrieval accuracy metrics</span> (<span class="bold">recall</span>, <span class="bold">precision</span>). Through comprehensive evaluation, we select a high-quality Q&A knowledge base produced through <span class="bold">knowledge distillation</span> as the foundation for subsequent integration.</p>
+                            <p>Designs comprehensive assessment system encompassing <span class="bold">text quality metrics</span> (readability, coherence, technical term density) and <span class="bold">retrieval accuracy metrics</span> (recall, precision). Through comprehensive evaluation, we select a high-quality Q&A knowledge base produced through <span class="bold">knowledge distillation</span> as the foundation for subsequent integration.</p>
                         </div>
                         <div class="methodology-tab" data-tab="3">
                             <h3><i class="fas fa-vote-yea"></i> Cross-Model Voting Mechanism</h3>
@@ -642,22 +656,22 @@
                     <div class="methodology-visual">
                         <div class="methodology-image active" data-image="1">
                             <!-- 替换为实际图片路径 -->
-                            <img src="./images/fig3_methodology_generation.jpg" alt="Multi-Model Generation">
+                            <img src="./images/fig3_methodology.png" alt="Multi-Model Generation">
                             <div class="image-caption">Multi-LLM Collaborative Q&A Generation Process</div>
                         </div>
                         <div class="methodology-image" data-image="2">
                             <!-- 替换为实际图片路径 -->
-                            <img src="./images/fig4_evaluation_framework.jpg" alt="Evaluation Framework">
+                            <img src="./images/fig4_evaluation_framework.png" alt="Evaluation Framework">
                             <div class="image-caption">Comprehensive Quantitative Evaluation Framework</div>
                         </div>
                         <div class="methodology-image" data-image="3">
                             <!-- 替换为实际图片路径 -->
-                            <img src="./images/fig5_voting_mechanism.jpg" alt="Voting Mechanism">
+                            <img src="./images/fig5_voting_mechanism.png" alt="Voting Mechanism">
                             <div class="image-caption">Cross-Model Voting and Integration Mechanism</div>
                         </div>
                         <div class="methodology-image" data-image="4">
                             <!-- 替换为实际图片路径 -->
-                            <img src="./images/fig6_kb_optimization.jpg" alt="Knowledge Base Optimization">
+                            <img src="./images/fig6_kb_optimization.png" alt="Knowledge Base Optimization">
                             <div class="image-caption">Rule-based Knowledge Base Optimization Strategy</div>
                         </div>
                     </div>
@@ -666,7 +680,7 @@
             <div class="lang-content" id="zh-methodology">
                 <h2 class="section-title">研究方法</h2>
                 <div class="methodology-intro">
-                    本研究提出了创新的<span class="bold">"多模型合成问答生成、比较与集成"</span>管道，核心流程为<span class="bold">"生成→评估→比较→集成"</span>。
+                    本研究提出了创新的<span class="bold_white">"多模型合成问答生成、比较与集成"</span>管道，核心流程为<span class="bold_white">"生成→评估→比较→集成"</span>。
                 </div>
                 <div class="methodology-content">
                     <div class="methodology-tabs">
@@ -676,7 +690,7 @@
                         </div>
                         <div class="methodology-tab" data-tab="2">
                             <h3><i class="fas fa-chart-line"></i> 量化评估框架</h3>
-                            <p>设计综合评估系统，涵盖<span class="bold">文本质量指标</span>（<span class="bold">可读性</span>、<span class="bold">连贯性</span>、<span class="bold">技术术语密度</span>）和<span class="bold">检索精度指标</span>（<span class="bold">召回率</span>、<span class="bold">精确率</span>）。通过综合评估，选出一个通过<span class="bold">知识蒸馏</span>产出的高质量Q&A知识集作为后续集成的基础。</p>
+                            <p>设计综合评估系统，涵盖<span class="bold">文本质量指标</span>（可读性、连贯性、技术术语密度等）和<span class="bold">检索准确性指标</span>（召回率、精确率）。通过综合评估，选出一个通过<span class="bold">知识蒸馏</span>产出的高质量Q&A知识集作为后续集成的基础。</p>
                         </div>
                         <div class="methodology-tab" data-tab="3">
                             <h3><i class="fas fa-vote-yea"></i> 跨模型投票机制</h3>
@@ -690,22 +704,22 @@
                     <div class="methodology-visual">
                         <div class="methodology-image active" data-image="1">
                             <!-- 替换为实际图片路径 -->
-                            <img src="./images/fig3_methodology_generation.jpg" alt="Multi-Model Generation">
+                            <img src="./images/fig3_methodology.png" alt="Multi-Model Generation">
                             <div class="image-caption">多模型协同问答生成流程</div>
                         </div>
                         <div class="methodology-image" data-image="2">
                             <!-- 替换为实际图片路径 -->
-                            <img src="./images/fig4_evaluation_framework.jpg" alt="Evaluation Framework">
+                            <img src="./images/fig4_evaluation_framework.png" alt="Evaluation Framework">
                             <div class="image-caption">综合量化评估框架</div>
                         </div>
                         <div class="methodology-image" data-image="3">
                             <!-- 替换为实际图片路径 -->
-                            <img src="./images/fig5_voting_mechanism.jpg" alt="Voting Mechanism">
+                            <img src="./images/fig5_voting_mechanism.png" alt="Voting Mechanism">
                             <div class="image-caption">跨模型投票与集成机制</div>
                         </div>
                         <div class="methodology-image" data-image="4">
                             <!-- 替换为实际图片路径 -->
-                            <img src="./images/fig6_kb_optimization.jpg" alt="Knowledge Base Optimization">
+                            <img src="./images/fig6_kb_optimization.png" alt="Knowledge Base Optimization">
                             <div class="image-caption">基于规则的知识库优化策略</div>
                         </div>
                     </div>
@@ -743,22 +757,22 @@
                 <!-- Second Row -->
                 <div class="experiment-grid-2">
                     <div class="experiment-wide-card">
-                        <h3><i class="fas fa-search"></i> Retrieval Accuracy Results</h3>
+                        <h3><i class="fas fa-trophy"></i> Text Quality Enhancement</h3>
                         <ul>
-                            <li><span class="bold">~20 percentage points improvement</span> in <span class="bold">recall</span> and <span class="bold">precision</span></li>
-                            <li><span class="bold">Claude Sonnet 4</span>: <span class="bold">58.04% recall</span> and <span class="bold">59.97% precision</span> GSB win rates</li>
-                            <li>Qualitative cases: Traditional KB (<span class="bold">0% relevance</span>) vs Q&A KB (<span class="bold">80% recall, 90% precision</span>)</li>
+                            <li><span class="bold">Gemini 2.5 Pro</span> achieved optimal <span class="bold">readability performance</span></li>
+                            <li><span class="bold">Claude Sonnet 4</span> and <span class="bold">DeepSeek R1</span> led in <span class="bold">content richness</span></li>
+                            <li>Significant improvements in <span class="bold">text coherence</span> and <span class="bold">technical depth</span></li>
                         </ul>
                         <div class="image-row">
-                            <div class="image-item">
+                            <div class="image-item-no-circle">
                                 <!-- 替换为实际图片路径 -->
-                                <img src="./images/fig7_performance_comparison.jpg" alt="Knowledge Base Comparison">
-                                <div class="image-caption">Figure 3: Performance Comparison between Traditional and Q&A Knowledge Bases</div>
+                                <img src="./images/fig7_text readability_and_content_richness metrics.png" alt="Knowledge Base Comparison">
+                                <div class="image-caption">Text readability and content richness metrics across different knowledge bases</div>
                             </div>
-                            <div class="image-item">
+                            <div class="image-item-no-circle">
                                 <!-- 替换为实际图片路径 -->
-                                <img src="./images/fig8_retrieval_accuracy.jpg" alt="Retrieval Accuracy Results">
-                                <div class="image-caption">Figure 4: Detailed Retrieval Accuracy Results across Different Models</div>
+                                <img src="./images/fig8_structural_quality_metrics.png" alt="Retrieval Accuracy Results">
+                                <div class="image-caption">Structural quality metrics across different knowledge bases</div>
                             </div>
                         </div>
                     </div>
@@ -766,23 +780,23 @@
 
                 <!-- Third Row -->
                 <div class="experiment-grid-3">
-                    <h3><i class="fas fa-trophy"></i> Text Quality Enhancement</h3>
+                    <h3><i class="fas fa-search"></i> Retrieval Accuracy Results</h3>
                     <ul>
-                        <li><span class="bold">Gemini 2.5 Pro</span> achieved optimal <span class="bold">readability performance</span></li>
-                        <li><span class="bold">Claude Sonnet 4</span> and <span class="bold">DeepSeek R1</span> led in <span class="bold">content richness</span></li>
-                        <li>Significant improvements in <span class="bold">text coherence</span> and <span class="bold">technical depth</span></li>
+                        <li><span class="bold">~20 percentage points improvement</span> in <span class="bold">recall</span> and <span class="bold">precision</span></li>
+                        <li><span class="bold">Claude Sonnet 4</span>: <span class="bold">58.04% recall</span> and <span class="bold">59.97% precision</span> GSB win rates</li>
+                        <li>Qualitative cases: Traditional KB (<span class="bold">0% recall, 0% precision</span>) vs Q&A KB (<span class="bold">80% recall, 90% precision</span>)</li>
                     </ul>
                     <div class="media-container">
-                        <div class="image-item">
+                        <div class="image-item-no-circle">
                             <!-- 替换为实际图片路径 -->
-                            <img src="./images/fig9_text_quality_results.jpg" alt="Text Quality Results">
-                            <div class="image-caption">Figure 5: Text Quality Enhancement Results across Different LLMs</div>
+                            <img src="./images/fig9_retrieval_accuracy.png" alt="Text Quality Results">
+                            <div class="image-caption">Retrieval accuracy metrics across different knowledge bases</div>
                         </div>
                         <div class="video-container">
                             <div class="video-preview" onclick="playVideo(this)">
                                 <i class="fas fa-play"></i>
                             </div>
-                            <div class="image-caption">Video 1: Interactive Demo of Q&A Knowledge Base Performance</div>
+                            <div class="image-caption">Interactive Demo of knowledge retrieval and responses by chatbots that use two knowledge bases. On the left is a chatbot using the baseline knowledge base, while on the right is a chatbot using our Proposed Q&A knowledge base.</div>
                         </div>
                     </div>
                 </div>
@@ -814,22 +828,22 @@
                 <!-- Second Row -->
                 <div class="experiment-grid-2">
                     <div class="experiment-wide-card">
-                        <h3><i class="fas fa-search"></i> 检索精度结果</h3>
+                        <h3><i class="fas fa-trophy"></i> 文本质量提升</h3>
                         <ul>
-                            <li><span class="bold">召回率</span>和<span class="bold">精确率</span>提升约<span class="bold">20个百分点</span></li>
-                            <li><span class="bold">Claude Sonnet 4</span>：GSB胜率达<span class="bold">58.04%(召回率)</span>和<span class="bold">59.97%(精确率)</span></li>
-                            <li>定性案例：传统知识库(<span class="bold">0%相关度</span>) vs 问答知识库(<span class="bold">80%召回率，90%精确率</span>)</li>
+                            <li><span class="bold">Gemini 2.5 Pro</span>在<span class="bold">可读性方面</span>表现最佳</li>
+                            <li><span class="bold">Claude Sonnet 4</span>和<span class="bold">DeepSeek R1</span>在<span class="bold">内容丰富度</span>方面领先</li>
+                            <li><span class="bold">文本连贯性</span>和<span class="bold">技术深度</span>显著改善</li>
                         </ul>
                         <div class="image-row">
-                            <div class="image-item">
+                            <div class="image-item-no-circle">
                                 <!-- 替换为实际图片路径 -->
-                                <img src="./images/fig7_performance_comparison.jpg" alt="Knowledge Base Comparison">
-                                <div class="image-caption">图3: 传统知识库与问答知识库性能对比</div>
+                                <img src="./images/fig7_text readability_and_content_richness metrics.png" alt="Knowledge Base Comparison">
+                                <div class="image-caption">不同知识库的文本可读性和内容丰富度指标</div>
                             </div>
-                            <div class="image-item">
+                            <div class="image-item-no-circle">
                                 <!-- 替换为实际图片路径 -->
-                                <img src="./images/fig8_retrieval_accuracy.jpg" alt="Retrieval Accuracy Results">
-                                <div class="image-caption">图4: 不同模型的详细检索精度结果</div>
+                                <img src="./images/fig8_structural_quality_metrics.png" alt="Retrieval Accuracy Results">
+                                <div class="image-caption">不同知识库的结构质量指标</div>
                             </div>
                         </div>
                     </div>
@@ -837,23 +851,23 @@
 
                 <!-- Third Row -->
                 <div class="experiment-grid-3">
-                    <h3><i class="fas fa-trophy"></i> 文本质量提升</h3>
+                    <h3><i class="fas fa-search"></i> 检索精度结果</h3>
                     <ul>
-                        <li><span class="bold">Gemini 2.5 Pro</span>在<span class="bold">可读性方面</span>表现最佳</li>
-                        <li><span class="bold">Claude Sonnet 4</span>和<span class="bold">DeepSeek R1</span>在<span class="bold">内容丰富度</span>方面领先</li>
-                        <li><span class="bold">文本连贯性</span>和<span class="bold">技术深度</span>显著改善</li>
+                        <li><span class="bold">召回率</span>和<span class="bold">精确率</span>提升约<span class="bold">20个百分点</span></li>
+                        <li><span class="bold">Claude Sonnet 4</span>：GSB胜率达<span class="bold">58.04%(召回率)</span>和<span class="bold">59.97%(精确率)</span></li>
+                        <li>定性案例：传统知识库(<span class="bold">0%召回率，0%精确率</span>) vs 问答知识库(<span class="bold">80%召回率，90%精确率</span>)</li>
                     </ul>
                     <div class="media-container">
-                        <div class="image-item">
+                        <div class="image-item-no-circle">
                             <!-- 替换为实际图片路径 -->
-                            <img src="./images/fig9_text_quality_results.jpg" alt="Text Quality Results">
-                            <div class="image-caption">图5: 不同LLM的文本质量提升结果</div>
+                            <img src="./images/fig9_retrieval_accuracy.png" alt="Text Quality Results">
+                            <div class="image-caption">不同知识库的检索准确性指标</div>
                         </div>
                         <div class="video-container">
                             <div class="video-preview" onclick="playVideo(this)">
                                 <i class="fas fa-play"></i>
                             </div>
-                            <div class="image-caption">视频1: 问答知识库性能交互式演示</div>
+                            <div class="image-caption">使用两个知识库的聊天机器人进行知识检索和回复的互动演示。左侧为使用基础知识库的聊天机器人，右侧为使用我们提出问答对知识库的聊天机器人</div>
                         </div>
                     </div>
                 </div>
@@ -913,7 +927,7 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 Multi-LLM Knowledge Distillation Research. All rights reserved.</p>
-            <p>Contact: nianheng.zhang@connect.hku.hk | Department of EEE, University of Hong Kong</p>
+            <p>Contact: zhangnianheng2002@foxmail.com | Department of EEE, the University of Hong Kong</p>
         </div>
     </footer>
 
