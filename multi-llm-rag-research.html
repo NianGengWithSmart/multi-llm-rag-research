@@ -215,17 +215,34 @@
             font-style: italic;
             color: #666;
             font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Wide image for system architecture */
+        .wide-image-container {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .wide-image-container img {
+            max-width: 100%;
+            width: 90%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         }
 
         .image-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
+            justify-items: center;
         }
 
         .image-item {
             text-align: center;
+            max-width: 400px;
         }
 
         .image-item img {
@@ -235,6 +252,10 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             aspect-ratio: auto;
             object-fit: contain;
+        }
+
+        .image-item-no-circle {
+            text-align: center;
         }
 
         .image-item-no-circle img {
@@ -343,12 +364,42 @@
             grid-column: 1 / -1;
         }
 
+        .experiment-wide-card h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .experiment-wide-card ul {
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .experiment-wide-card li {
+            margin-bottom: 0.5rem;
+        }
+
         .experiment-grid-3 {
             background: white;
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
+        }
+
+        .experiment-grid-3 h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .experiment-grid-3 ul {
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .experiment-grid-3 li {
+            margin-bottom: 0.5rem;
         }
 
         .media-container {
@@ -465,6 +516,10 @@
             .image-row {
                 grid-template-columns: 1fr;
             }
+
+            .wide-image-container img {
+                width: 95%;
+            }
         }
 
         /* Footer */
@@ -517,6 +572,12 @@
     <section id="background" class="section">
         <div class="container">
             <div class="lang-content active" id="en-background">
+                <!-- System Architecture Comparison -->
+                <div class="wide-image-container">
+                    <img src="./images/fig0_system_architecture_comparison.png" alt="System Architecture Comparison">
+                    <div class="image-caption">Comparison of the system architecture diagrams of a traditional Retrieval Augmentation Generation (RAG) system and a RAG Chatbot System Based On Multiple Model Synthetic Q&A Generation Comparison and Integration. Prior to inference, knowledge is extracted and augmented based on course document content using Multiple LLMs and a high quality Q&A set is generated for downstream retrieval.</div>
+                </div>
+
                 <h2 class="section-title">Background & Objective</h2>
                 <div class="content-grid">
                     <div class="content-card">
@@ -564,31 +625,35 @@
                 建议的图片命名规范：
                 - fig1_traditional_rag_problems.jpg/png
                 - fig2_llm_hallucination_examples.jpg/png
-                - fig3_methodology.jpg/png
+                - fig3_methodology_generation.jpg/png
                 - fig4_evaluation_framework.jpg/png
                 - fig5_voting_mechanism.jpg/png
                 - fig6_kb_optimization.jpg/png
-                - fig7_text readability_and_content_richness metrics.jpg/png
-                - fig8_structural_quality_metrics.jpg/png
-                - fig9_retrieval_accuracy.jpg/png
+                - fig7_performance_comparison.jpg/png
+                - fig8_retrieval_accuracy.jpg/png
+                - fig9_text_quality_results.jpg/png
                 - demo_video.mp4
                 =================== 图片路径替换说明结束 ===================
                 -->
-                
+
                 <div class="image-row">
                     <div class="image-item">
-                        <!-- 替换为实际图片路径 -->
                         <img src="./images/fig1_llm_hallucination_examples.png" alt="LLM Hallucination Examples">
                         <div class="image-caption">Examples of LLM lacking critical knowledge in Course-specific Queries. When a student asked about ELEC3442 project requirements, LLM gaves generic hardware design steps, not the course-specific details. </div>
                     </div>
                     <div class="image-item">
-                        <!-- 替换为实际图片路径 -->
                         <img src="./images/fig2_traditional_rag_problems.png" alt="Traditional RAG Problems">
                         <div class="image-caption">Challenges of traditional RAG systems in the knowledge base building process</div>
                     </div>
                 </div>
             </div>
             <div class="lang-content" id="zh-background">
+                <!-- System Architecture Comparison -->
+                <div class="wide-image-container">
+                    <img src="./images/system_architecture_comparison.png" alt="System Architecture Comparison">
+                    <div class="image-caption">传统检索增强生成（RAG）系统与基于多模型合成问答生成比较集成的RAG聊天机器人系统的系统架构图比较。在推理之前，使用多个LLM基于课程文档内容提取和增强知识，并生成高质量的问答集用于下游检索。</div>
+                </div>
+
                 <h2 class="section-title">研究背景与目标</h2>
                 <div class="content-grid">
                     <div class="content-card">
@@ -612,12 +677,10 @@
                 </div>
                 <div class="image-row">
                     <div class="image-item">
-                        <!-- 替换为实际图片路径 -->
                         <img src="./images/fig1_llm_hallucination_examples.png" alt="LLM Hallucination Examples">
                         <div class="image-caption">LLM 在特定课程问题中缺乏关键知识的示例。当一名学生询问 ELEC3442 项目要求时，LLM 只提供了一般的硬件设计步骤，而没有提供特定课程的详细信息。</div>
                     </div>
                     <div class="image-item">
-                        <!-- 替换为实际图片路径 -->
                         <img src="./images/fig2_traditional_rag_problems.png" alt="Traditional RAG Problems">
                         <div class="image-caption">传统RAG系统在知识库构建过程中的挑战</div>
                     </div>
@@ -655,22 +718,18 @@
                     </div>
                     <div class="methodology-visual">
                         <div class="methodology-image active" data-image="1">
-                            <!-- 替换为实际图片路径 -->
                             <img src="./images/fig3_methodology.png" alt="Multi-Model Generation">
                             <div class="image-caption">Multi-LLM Collaborative Q&A Generation Process</div>
                         </div>
                         <div class="methodology-image" data-image="2">
-                            <!-- 替换为实际图片路径 -->
                             <img src="./images/fig4_evaluation_framework.png" alt="Evaluation Framework">
                             <div class="image-caption">Comprehensive Quantitative Evaluation Framework</div>
                         </div>
                         <div class="methodology-image" data-image="3">
-                            <!-- 替换为实际图片路径 -->
                             <img src="./images/fig5_voting_mechanism.png" alt="Voting Mechanism">
                             <div class="image-caption">Cross-Model Voting and Integration Mechanism</div>
                         </div>
                         <div class="methodology-image" data-image="4">
-                            <!-- 替换为实际图片路径 -->
                             <img src="./images/fig6_kb_optimization.png" alt="Knowledge Base Optimization">
                             <div class="image-caption">Rule-based Knowledge Base Optimization Strategy</div>
                         </div>
@@ -703,22 +762,18 @@
                     </div>
                     <div class="methodology-visual">
                         <div class="methodology-image active" data-image="1">
-                            <!-- 替换为实际图片路径 -->
                             <img src="./images/fig3_methodology.png" alt="Multi-Model Generation">
                             <div class="image-caption">多模型协同问答生成流程</div>
                         </div>
                         <div class="methodology-image" data-image="2">
-                            <!-- 替换为实际图片路径 -->
                             <img src="./images/fig4_evaluation_framework.png" alt="Evaluation Framework">
                             <div class="image-caption">综合量化评估框架</div>
                         </div>
                         <div class="methodology-image" data-image="3">
-                            <!-- 替换为实际图片路径 -->
                             <img src="./images/fig5_voting_mechanism.png" alt="Voting Mechanism">
                             <div class="image-caption">跨模型投票与集成机制</div>
                         </div>
                         <div class="methodology-image" data-image="4">
-                            <!-- 替换为实际图片路径 -->
                             <img src="./images/fig6_kb_optimization.png" alt="Knowledge Base Optimization">
                             <div class="image-caption">基于规则的知识库优化策略</div>
                         </div>
@@ -765,12 +820,10 @@
                         </ul>
                         <div class="image-row">
                             <div class="image-item-no-circle">
-                                <!-- 替换为实际图片路径 -->
                                 <img src="./images/fig7_text readability_and_content_richness metrics.png" alt="Knowledge Base Comparison">
                                 <div class="image-caption">Text readability and content richness metrics across different knowledge bases</div>
                             </div>
                             <div class="image-item-no-circle">
-                                <!-- 替换为实际图片路径 -->
                                 <img src="./images/fig8_structural_quality_metrics.png" alt="Retrieval Accuracy Results">
                                 <div class="image-caption">Structural quality metrics across different knowledge bases</div>
                             </div>
@@ -788,7 +841,6 @@
                     </ul>
                     <div class="media-container">
                         <div class="image-item-no-circle">
-                            <!-- 替换为实际图片路径 -->
                             <img src="./images/fig9_retrieval_accuracy.png" alt="Text Quality Results">
                             <div class="image-caption">Retrieval accuracy metrics across different knowledge bases</div>
                         </div>
@@ -836,12 +888,10 @@
                         </ul>
                         <div class="image-row">
                             <div class="image-item-no-circle">
-                                <!-- 替换为实际图片路径 -->
                                 <img src="./images/fig7_text readability_and_content_richness metrics.png" alt="Knowledge Base Comparison">
                                 <div class="image-caption">不同知识库的文本可读性和内容丰富度指标</div>
                             </div>
                             <div class="image-item-no-circle">
-                                <!-- 替换为实际图片路径 -->
                                 <img src="./images/fig8_structural_quality_metrics.png" alt="Retrieval Accuracy Results">
                                 <div class="image-caption">不同知识库的结构质量指标</div>
                             </div>
@@ -859,7 +909,6 @@
                     </ul>
                     <div class="media-container">
                         <div class="image-item-no-circle">
-                            <!-- 替换为实际图片路径 -->
                             <img src="./images/fig9_retrieval_accuracy.png" alt="Text Quality Results">
                             <div class="image-caption">不同知识库的检索准确性指标</div>
                         </div>
@@ -983,8 +1032,8 @@
             
             // 根据当前语言更新视频说明文字
             const caption = currentLang === 'en' ? 
-                'Video 1: Interactive Demo of Q&A Knowledge Base Performance' : 
-                '视频1: 问答知识库性能交互式演示';
+                'Interactive Demo of knowledge retrieval and responses by chatbots that use two knowledge bases. On the left is a chatbot using the baseline knowledge base, while on the right is a chatbot using our Proposed Q&A knowledge base.' : 
+                '使用两个知识库的聊天机器人进行知识检索和回复的互动演示。左侧为使用基础知识库的聊天机器人，右侧为使用我们提出问答对知识库的聊天机器人';
                 
             videoContainer.innerHTML = videoHTML + `<div class="image-caption">${caption}</div>`;
         }
