@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-LLM Knowledge Distillation and RAG System Optimization</title>
+    <title>Multi-LLM Knowledge Enhancement and Agent RAG System Optimization</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -49,6 +49,17 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
         }
 
         .nav-links {
@@ -468,6 +479,12 @@
         }
 
         /* Responsive */
+        @media (max-width: 1024px) {
+            .logo-text {
+                font-size: 1rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav {
                 flex-direction: column;
@@ -520,6 +537,22 @@
             .wide-image-container img {
                 width: 95%;
             }
+
+            .logo {
+                font-size: 1.2rem;
+                justify-content: center;
+            }
+            
+            .logo-text {
+                font-size: 0.9rem;
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                max-width: 150px;
+            }
         }
 
         /* Footer */
@@ -529,20 +562,60 @@
             text-align: center;
             padding: 2rem;
         }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-content:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <nav class="nav container">
-            <div class="logo">
-                <i class="fas fa-brain"></i> Multi-LLM RAG Research
+            <div class="logo" data-en="Multi-LLM Knowledge Enhancement" data-zh="多模型知识增强研究">
+                <i class="fas fa-brain"></i> 
+                <span id="logoText" class="logo-text">Multi-LLM Knowledge Enhancement</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#background">Background</a></li>
-                <li><a href="#methodology">Methodology</a></li>
-                <li><a href="#experiment">Experiment</a></li>
-                <li><a href="#contribution">Contribution</a></li>
+                <li><a href="#background" data-en="Background" data-zh="研究背景">Background</a></li>
+                <li><a href="#methodology" data-en="Methodology" data-zh="研究方法">Methodology</a></li>
+                <li><a href="#experiment" data-en="Experiment" data-zh="实验分析">Experiment</a></li>
+                <li><a href="#contribution" data-en="Contribution" data-zh="主要贡献">Contribution</a></li>
             </ul>
             <button class="lang-switch" onclick="toggleLanguage()">
                 <i class="fas fa-language"></i> <span id="langText">中文</span>
@@ -555,12 +628,12 @@
     <section class="hero">
         <div class="hero-content">
             <div class="lang-content active" id="en-hero">
-                <h1>Multi-LLM Knowledge Distillation and RAG System Optimization</h1>
+                <h1>Multi-LLM Knowledge Enhancement and Agent RAG System Optimization</h1>
                 <p>For Educational Applications</p>
             </div>
             <div class="lang-content" id="zh-hero">
-                <h1>面向教育场景的多模型知识蒸馏与RAG系统优化研究</h1>
-                <p>提升检索增强生成系统在高等教育中的应用效果</p>
+                <h1>面向教育场景的多模型知识增强与智能体系统优化研究</h1>
+                <p>提升检索生成增强系统在高等教育中的应用效果</p>
             </div>
             <a href="#background" class="cta-button">
                 <i class="fas fa-arrow-down"></i> Explore Research
@@ -650,7 +723,7 @@
             <div class="lang-content" id="zh-background">
                 <!-- System Architecture Comparison -->
                 <div class="wide-image-container">
-                    <img src="./images/system_architecture_comparison.png" alt="System Architecture Comparison">
+                    <img src="./images/fig0_system_architecture_comparison.png" alt="系统架构比较">
                     <div class="image-caption">传统检索增强生成（RAG）系统与基于多模型合成问答生成比较集成的RAG聊天机器人系统的系统架构图比较。在推理之前，使用多个LLM基于课程文档内容提取和增强知识，并生成高质量的问答集用于下游检索。</div>
                 </div>
 
@@ -975,7 +1048,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Multi-LLM Knowledge Distillation Research. All rights reserved.</p>
+            <p>&copy; 2025 Multi-LLM Knowledge Enhancement Research. All rights reserved.</p>
             <p>Contact: zhangnianheng2002@foxmail.com | Department of EEE, the University of Hong Kong</p>
         </div>
     </footer>
@@ -1004,22 +1077,32 @@
 
     // Language toggle — now also resets the default tab/image for the chosen lang
     function toggleLanguage() {
-      const langText = document.getElementById('langText');
-      const enEls = document.querySelectorAll('[id^="en-"]');
-      const zhEls = document.querySelectorAll('[id^="zh-"]');
-
-      if (currentLang === 'en') {
-        currentLang = 'zh';
-        langText.textContent = 'English';
-        enEls.forEach(el => el.classList.remove('active'));
-        zhEls.forEach(el => el.classList.add('active'));
-      } else {
-        currentLang = 'en';
-        langText.textContent = '中文';
-        zhEls.forEach(el => el.classList.remove('active'));
-        enEls.forEach(el => el.classList.add('active'));
-      }
-      setDefaultMethodologyTab(currentLang);
+        const langText = document.getElementById('langText');
+        const logoText = document.getElementById('logoText');
+        const enEls = document.querySelectorAll('[id^="en-"]');
+        const zhEls = document.querySelectorAll('[id^="zh-"]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        if (currentLang === 'en') {
+            currentLang = 'zh';
+            langText.textContent = 'English';
+            logoText.textContent = logoText.parentElement.getAttribute('data-zh');
+            navLinks.forEach(link => {
+                link.textContent = link.getAttribute('data-zh');
+            });
+            enEls.forEach(el => el.classList.remove('active'));
+            zhEls.forEach(el => el.classList.add('active'));
+        } else {
+            currentLang = 'en';
+            langText.textContent = '中文';
+            logoText.textContent = logoText.parentElement.getAttribute('data-en');
+            navLinks.forEach(link => {
+                link.textContent = link.getAttribute('data-en');
+            });
+            zhEls.forEach(el => el.classList.remove('active'));
+            enEls.forEach(el => el.classList.add('active'));
+        }
+        setDefaultMethodologyTab(currentLang);
     }
 
     /**
@@ -1074,7 +1157,52 @@
 
     // Initialize default tab for English on first load
     document.addEventListener('DOMContentLoaded', () => setDefaultMethodologyTab('en'));
+
+    function setupImageZoom() {
+        const images = document.querySelectorAll('img:not(.modal-content)');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.close-modal');
+
+        images.forEach(img => {
+            if (img.parentElement.className !== 'video-preview') {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    modal.style.display = 'block';
+                    modalImg.src = img.src;
+                });
+            }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+            }
+        });
+    }
+
+    // 在 DOMContentLoaded 事件中初始化
+    document.addEventListener('DOMContentLoaded', () => {
+        // ...existing code...
+        setupImageZoom();
+    });
   </script>
   <!-- ↑↑↑  END REPLACED SCRIPT BLOCK  ↑↑↑ -->
+
+  <div id="imageModal" class="image-modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
 </body>
 </html>
